@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Home",
+    "link": "/",
+    "type": "link"
+  },
+  {
+    "name": "Services",
+    "type": "dropdown",
+    "children": [
+      {
+        "name": "Home Remodeling",
+        "type": "dropdown",
+        "children": [
+          {
+            "name": "Sub Categories",
+            "link": "/services/home-remodeling/sub-categories",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "name": "Home Construction",
+        "link": "/services/home-construction",
+        "type": "link"
+      }
+    ]
+  },
+  {
+    "name": "Gallery",
+    "link": "/gallery",
+    "type": "link"
+  },
+  {
+    "name": "Insurance",
+    "link": "/insurance",
+    "type": "link"
+  },
+  {
+    "name": "Contact Us",
+    "link": "/contact",
+    "type": "link"
+  }
+]
