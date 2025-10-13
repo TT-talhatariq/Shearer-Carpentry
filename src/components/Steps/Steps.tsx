@@ -72,14 +72,14 @@ export default function Steps() {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 100,
       },
     },
   };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <section className="relative md:py-20 py-4 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50/40 to-gray-100/30" />

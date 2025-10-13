@@ -94,7 +94,7 @@ export default function About() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 mt-8">
               <Link
-                href="tel:7632453755"
+                href="tel:+17632453755"
                 className="inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 bg-brand text-white font-semibold rounded-full hover:bg-brand-hover transition-all duration-300 shadow-lg hover:shadow-xl text-sm lg:text-base"
               >
                 Call Now

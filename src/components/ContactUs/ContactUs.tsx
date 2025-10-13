@@ -2,6 +2,143 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { toast } from 'sonner';
+
+function EmailTemplate(values: any): string {
+  const { name, email, phone, message } = values;
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>New Message from Contact Us</title>
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #18181B;
+          }
+          .email-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .email-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 32px;
+            margin-top: 20px;
+          }
+          .email-header {
+            text-align: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 32px;
+          }
+          .email-header .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #16a34a;
+            text-decoration: none;
+            margin-bottom: 8px;
+          }
+          .email-header .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 8px;
+          }
+          .message-content {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+          }
+          .field-group {
+            margin-bottom: 16px;
+          }
+          .field-label {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 4px;
+          }
+          .field-value {
+            font-size: 16px;
+            color: #18181B;
+            font-weight: 500;
+          }
+          .message-text {
+            white-space: pre-wrap;
+            color: #18181B;
+            line-height: 1.6;
+          }
+          .email-footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+            color: #64748b;
+            font-size: 14px;
+          }
+          .highlight {
+            color: #16a34a;
+          }
+          .timestamp {
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: right;
+            margin-top: 16px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="email-content">
+            <div class="email-header">
+              <div class="logo">Shearer Carpentry</div>
+              <div class="subtitle">New Contact Form Submission</div>
+            </div>
+            
+            <div class="field-group">
+              <div class="field-label">From</div>
+              <div class="field-value">${name}</div>
+            </div>
+            
+            <div class="field-group">
+              <div class="field-label">Email Address</div>
+              <div class="field-value">${email}</div>
+            </div>
+            
+            <div class="field-group">
+              <div class="field-label">Phone Number</div>
+              <div class="field-value">${phone || 'Not provided'}</div>
+            </div>
+            
+            <div class="message-content">
+              <div class="field-label">Message</div>
+              <div class="message-text">${message}</div>
+            </div>
+            
+            <div class="timestamp">
+              Received on ${new Date().toLocaleString()}
+            </div>
+            
+            <div class="email-footer">
+              <div class="highlight">Shearer Carpentry</div>
+              <div style="margin-top: 8px">Professional Construction & Remodeling Services</div>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+}
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -52,15 +189,26 @@ export default function ContactUs() {
     setIsSubmitting(true);
     
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Reset form
+      const email = 'shearercarpentry@gmail.com'; 
+      const subject = `New Contact from ${formData.name}`;
+      const html = EmailTemplate(formData);
+
+      const response = await fetch(
+        'https://api.carzoomo.com/socially/send-email',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, subject, html }),
+        },
+      );
+
+      if (!response.ok) throw new Error('Failed to send message');
+
+      toast.success('Message sent successfully! We\'ll get back to you soon.');
       setFormData({ name: '', email: '', phone: '', message: '' });
-      alert('Message sent successfully!');
     } catch (error) {
-      console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again.');
+      toast.error('Failed to send message. Please try again or call us directly.');
+      console.error('Error sending email:', error);
     } finally {
       setIsSubmitting(false);
     }

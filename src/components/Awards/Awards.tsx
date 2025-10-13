@@ -1,28 +1,29 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Award, Star } from 'lucide-react';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Award, Star } from "lucide-react";
 
 export default function Awards() {
   const awards = [
     {
       id: 1,
-      title: 'Readers\' Choice',
-      subtitle: 'STAR News Winner',
-      description: 'Voted by readers as the top contractor in our area',
-      image: '/images/award1.jpg',
-      year: '2023',
-      category: 'Community Choice',
+      title: "Readers' Choice",
+      subtitle: "STAR News Winner",
+      description: "Voted by readers as the top contractor in our area",
+      image: "/images/award1.jpg",
+      year: "2023",
+      category: "Community Choice",
     },
     {
       id: 2,
-      title: 'Best of Houzz 2024',
-      subtitle: 'Service Award',
-      description: 'Recognized for exceptional service quality and customer satisfaction',
-      image: '/images/award2.jpg',
-      year: '2024',
-      category: 'Service Excellence',
+      title: "Best of Houzz 2024",
+      subtitle: "Service Award",
+      description:
+        "Recognized for exceptional service quality and customer satisfaction",
+      image: "/images/award2.jpg",
+      year: "2024",
+      category: "Service Excellence",
     },
   ];
 
@@ -42,7 +43,7 @@ export default function Awards() {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
+        type: "spring" as const,
         stiffness: 100,
       },
     },
@@ -77,9 +78,10 @@ export default function Awards() {
           </h2>
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-brand to-brand-hover rounded-full mb-6" />
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Recognized for excellence in construction services and customer satisfaction. 
-            We're honored to be trusted by homeowners throughout the Metro Area for our 
-            quality craftsmanship, reliable service, and commitment to exceeding expectations.
+            Recognized for excellence in construction services and customer
+            satisfaction. We're honored to be trusted by homeowners throughout
+            the Metro Area for our quality craftsmanship, reliable service, and
+            commitment to exceeding expectations.
           </p>
         </motion.div>
 
@@ -95,52 +97,60 @@ export default function Awards() {
             <motion.div
               key={award.id}
               variants={itemVariants}
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col justify-between h-full"
             >
-              {/* Award Image */}
-              <div className="relative mb-6">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-md">
-                  <Image
-                    src={award.image}
-                    alt={award.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+              {/* Card Inner Wrapper */}
+              <div className="flex flex-col items-center flex-grow">
+                {/* Award Image */}
+                <div className="relative mb-6 w-full">
+                  <div className="aspect-square w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-md">
+                    <Image
+                      src={award.image}
+                      alt={award.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  {/* Year Badge */}
+                  <div className="absolute top-4 right-4 bg-brand text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    {award.year}
+                  </div>
                 </div>
-                
-                {/* Year Badge */}
-                <div className="absolute top-4 right-4 bg-brand text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {award.year}
+
+                {/* Award Content */}
+                <div className="text-center flex flex-col flex-grow justify-between">
+                  <div>
+                    <div className="flex justify-center mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-5 h-5 text-yellow-400 fill-current"
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-brand transition-colors">
+                      {award.title}
+                    </h3>
+
+                    <p className="text-lg font-semibold text-brand mb-3">
+                      {award.subtitle}
+                    </p>
+
+                    <p className="text-gray-600 leading-relaxed mb-4 line-clamp-4">
+                      {award.description}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Award Content */}
-              <div className="text-center">
-                <div className="flex justify-center mb-3">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-brand transition-colors">
-                  {award.title}
-                </h3>
-                
-                <p className="text-lg font-semibold text-brand mb-3">
-                  {award.subtitle}
-                </p>
-                
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  {award.description}
-                </p>
-                
-                <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full">
-                  <span className="text-sm font-medium text-gray-700">
-                    {award.category}
-                  </span>
-                </div>
+              {/* Category Badge (bottom aligned) */}
+              <div className="mt-auto inline-flex items-center px-4 py-2 bg-gray-100 rounded-full self-center">
+                <span className="text-sm font-medium text-gray-700">
+                  {award.category}
+                </span>
               </div>
 
               {/* Decorative Elements */}
@@ -149,7 +159,6 @@ export default function Awards() {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

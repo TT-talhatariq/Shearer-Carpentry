@@ -64,7 +64,7 @@ const Help = () => {
             className="flex justify-center"
           >
             <a
-              href="tel:7632453755"
+              href="tel:+17632453755"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand to-brand-hover text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl hover:from-brand-hover hover:to-brand transition-all duration-300 transform hover:scale-105"
             >
               <Phone className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />

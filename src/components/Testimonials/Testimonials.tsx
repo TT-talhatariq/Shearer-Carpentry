@@ -1,51 +1,52 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 const testimonials = [
   {
     id: 1,
     quote:
-      'Shearer Carpentry transformed our basement into a beautiful family room. The attention to detail and quality craftsmanship exceeded our expectations. Highly recommended!',
-    name: 'Michael Johnson',
-    title: 'Homeowner',
+      "Had Jesse and his team install storm doors on my new home. They did a great job and cleaned up everything afterwards. Even removed the window stickers and washed the glass.",
+    name: "Carolyn Cunningham",
+    image: "/carolyn.png",
     rating: 5,
   },
   {
     id: 2,
     quote:
-      'Our kitchen renovation was completed on time and within budget. The team was professional, clean, and communicated throughout the entire process.',
-    name: 'Sarah Martinez',
-    title: 'Property Manager',
+      "Shearer Carpentry responded quickly, gave a fair estimate, and completed the job ahead of schedule. The team was professional, efficient, and left everything spotless highly recommended!",
+    name: "Steve Florman",
+    image: "/steven.png",
     rating: 5,
   },
   {
     id: 3,
     quote:
-      'Our bathroom remodel looks amazing and the quality is outstanding.',
-    name: 'David Thompson',
-    title: 'Business Owner',
+      "Excellent craftsmanship, great customer care, and amazing flexibility. Jesse’s creative solutions made our cabinets beautiful. We’re beyond happy and will definitely hire him again!",
+    name: "Caroline Strang",
+    image: "/caroline.png",
     rating: 5,
   },
   {
     id: 4,
     quote:
-      'We hired Shearer Carpentry for our custom home construction. Their expertise and dedication to quality made our dream home a reality. Thank you!',
-    name: 'Jennifer Wilson',
-    title: 'Homeowner',
+      "I am SO happy I went with Shearer! They are a quality remodeling outfit, I always felt that the details were taken care of. Very nice people, too. Highly recommend them!",
+    name: "Lisa F",
+    image: "/lisa.png",
     rating: 5,
   },
   {
     id: 5,
     quote:
-      'Professional, reliable, and skilled craftsmen. They completed our home renovation project with precision and care. We couldn\'t be happier with the results.',
-    name: 'Robert Garcia',
-    title: 'Engineer',
+      "Tracey and the team were amazing to work with! Highly recommend for all your carpentry needs! Professional and reliable service. Great results every time!",
+    name: "Chris Northenscold",
+    image: "/chris.png",
     rating: 5,
   },
 ];
@@ -57,7 +58,7 @@ const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: 'easeOut',
+      ease: "easeOut",
     },
   },
 };
@@ -76,39 +77,40 @@ const staggerContainer = {
 const TestimonialCard = ({
   quote,
   name,
-  title,
   rating,
+  image,
   index,
 }: {
   quote: string;
   name: string;
-  title: string;
   rating: number;
+  image?: string;
   index: number;
 }) => {
   return (
     <motion.div
-      className="bg-white p-8 rounded-xl shadow-lg mx-3 h-full flex flex-col border border-gray-100"
+      className="bg-white p-4 md:p-8 rounded-xl shadow-lg mx-1 md:mx-3 flex flex-col items-center justify-center border border-gray-100 text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.5,
         delay: index * 0.1,
-        ease: 'easeOut',
+        ease: "easeOut",
       }}
       whileHover={{
         y: -5,
-        boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+        boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
       }}
     >
-      {/* Quote Icon */}
-      <div className="flex justify-center mb-6">
-        <div className="w-16 h-16 bg-gradient-to-br from-brand to-brand-hover rounded-full flex items-center justify-center">
-          <span className="text-white text-2xl font-bold">"</span>
-        </div>
-      </div>
+      <Image
+        src={image || "/carolyn.png"}
+        alt={name}
+        width={64}
+        height={64}
+        unoptimized
+        className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-green-600 mx-auto"
+      />
 
-      {/* Stars */}
       <motion.div
         className="flex justify-center mb-6"
         initial={{ opacity: 0 }}
@@ -127,15 +129,16 @@ const TestimonialCard = ({
           >
             <Star
               size={20}
-              className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}
+              className={
+                i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+              }
             />
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Quote */}
       <motion.p
-        className="text-gray-700 text-center mb-8 flex-grow leading-relaxed"
+        className="text-gray-700 text-center mb-6 md:mb-8 leading-relaxed"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 + index * 0.05, duration: 0.5 }}
@@ -143,9 +146,8 @@ const TestimonialCard = ({
         {quote}
       </motion.p>
 
-      {/* Customer Info */}
       <motion.div
-        className="text-center"
+        className="text-center flex flex-col items-center"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 + index * 0.05, duration: 0.5 }}
@@ -153,9 +155,10 @@ const TestimonialCard = ({
         <motion.div
           className="w-12 h-1 bg-gradient-to-r from-brand to-brand-hover mx-auto mb-3"
           initial={{ width: 0 }}
-          animate={{ width: '3rem' }}
+          animate={{ width: "3rem" }}
           transition={{ delay: 0.5 + index * 0.05, duration: 0.3 }}
         ></motion.div>
+
         <motion.p
           className="font-bold text-gray-900 text-lg"
           initial={{ opacity: 0 }}
@@ -164,14 +167,6 @@ const TestimonialCard = ({
         >
           {name}
         </motion.p>
-        <motion.p
-          className="text-gray-600 text-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 + index * 0.05, duration: 0.3 }}
-        >
-          {title}
-        </motion.p>
       </motion.div>
     </motion.div>
   );
@@ -179,6 +174,20 @@ const TestimonialCard = ({
 
 const Testimonials: React.FC = () => {
   const sliderRef = useRef<Slider | null>(null);
+  const [windowWidth, setWindowWidth] = React.useState(0);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 768;
 
   const settings = {
     dots: true,
@@ -190,23 +199,47 @@ const Testimonials: React.FC = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
+    centerMode: false,
+    centerPadding: "0px",
+    adaptiveHeight: false,
+    variableWidth: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: "0px",
+          infinite: true,
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: "0px",
+          infinite: true,
+          adaptiveHeight: false,
+          variableWidth: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: "0px",
+          infinite: true,
+          adaptiveHeight: false,
+          variableWidth: false,
         },
       },
     ],
-    dotsClass: 'slick-dots custom-dots',
+    dotsClass: "slick-dots custom-dots",
     customPaging: function (i: number) {
       return (
         <div className="dot-wrapper">
@@ -226,6 +259,14 @@ const Testimonials: React.FC = () => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
     }
+  };
+
+  const goToPrevMobile = () => {
+    setCurrentSlide((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const goToNextMobile = () => {
+    setCurrentSlide((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -273,7 +314,42 @@ const Testimonials: React.FC = () => {
 
           @media (max-width: 768px) {
             .testimonial-section .slick-dots {
-              bottom: -80px;
+              bottom: -40px;
+            }
+            
+            .testimonial-section .slick-slide {
+              padding: 0 10px !important;
+              width: 100% !important;
+            }
+            
+            .testimonial-section .slick-track {
+              display: flex !important;
+              align-items: stretch;
+              width: 100% !important;
+            }
+            
+            .testimonial-section .slick-slide > div {
+              height: 100%;
+              width: 100% !important;
+            }
+            
+            .testimonial-section .slick-list {
+              width: 100% !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .testimonial-section .slick-slide {
+              padding: 0 5px !important;
+              width: 100% !important;
+            }
+            
+            .testimonial-section .slick-track {
+              width: 100% !important;
+            }
+            
+            .testimonial-section .slick-slide > div {
+              width: 100% !important;
             }
           }
         `}</style>
@@ -293,13 +369,15 @@ const Testimonials: React.FC = () => {
             </span>
             TESTIMONIALS
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             What Our Customers Say
           </h2>
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-brand to-brand-hover rounded-full mb-6" />
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover why our customers love working with us. Read their experiences and see why we're the trusted choice for your construction and remodeling needs.
+            Discover why our customers love working with us. Read their
+            experiences and see why we're the trusted choice for your
+            construction and remodeling needs.
           </p>
         </motion.div>
 
@@ -311,19 +389,48 @@ const Testimonials: React.FC = () => {
           viewport={{ once: true, amount: 0.2 }}
           variants={staggerContainer}
         >
-          <Slider ref={sliderRef} {...settings} className="testimonial-slider">
-            {testimonials.map((testimonial, index) => (
-              <div key={testimonial.id} className="h-full md:h-[400px] pb-10">
+          {isMobile ? (
+            /* Mobile Single Card Display */
+            <div className="relative">
+              <div className="pb-10">
                 <TestimonialCard
-                  quote={testimonial.quote}
-                  name={testimonial.name}
-                  title={testimonial.title}
-                  rating={testimonial.rating}
-                  index={index}
+                  image={testimonials[currentSlide].image}
+                  quote={testimonials[currentSlide].quote}
+                  name={testimonials[currentSlide].name}
+                  rating={testimonials[currentSlide].rating}
+                  index={currentSlide}
                 />
               </div>
-            ))}
-          </Slider>
+              
+              {/* Mobile Dots */}
+              <div className="flex justify-center gap-2 mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? 'bg-brand scale-125' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            /* Desktop Slider */
+            <Slider key={windowWidth} ref={sliderRef} {...settings} className="testimonial-slider">
+              {testimonials.map((testimonial, index) => (
+                <div key={testimonial.id} className="h-[400px] pb-10">
+                  <TestimonialCard
+                    image={testimonial.image}
+                    quote={testimonial.quote}
+                    name={testimonial.name}
+                    rating={testimonial.rating}
+                    index={index}
+                  />
+                </div>
+              ))}
+            </Slider>
+          )}
 
           {/* Navigation Controls */}
           <motion.div
@@ -333,7 +440,7 @@ const Testimonials: React.FC = () => {
             transition={{ delay: 0.4, duration: 0.3 }}
           >
             <motion.button
-              onClick={goToPrev}
+              onClick={isMobile ? goToPrevMobile : goToPrev}
               className="bg-white rounded-full w-12 h-12 flex justify-center items-center shadow-lg hover:bg-gray-100 transition-colors border border-gray-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -341,7 +448,7 @@ const Testimonials: React.FC = () => {
               <ChevronLeft size={24} className="text-gray-700" />
             </motion.button>
             <motion.button
-              onClick={goToNext}
+              onClick={isMobile ? goToNextMobile : goToNext}
               className="bg-gradient-to-r from-brand to-brand-hover rounded-full w-12 h-12 flex justify-center items-center shadow-lg hover:from-brand-hover hover:to-brand transition-colors"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}

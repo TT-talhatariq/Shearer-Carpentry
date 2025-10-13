@@ -21,6 +21,9 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null);
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const [hoveredSubMenu, setHoveredSubMenu] = useState<string | null>(null);
 
   const isCarDetailPage =
     pathname &&
@@ -43,7 +46,13 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    if (isMobileMenuOpen) {
+      setOpenDropdown(null);
+      setOpenSubDropdown(null);
+    }
+  };
 
   const isActive = (link: string) => {
     if (link === '/' && pathname === '/') return true;
@@ -56,7 +65,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Top Banner */}
       <div className="md:hidden fixed top-0 left-0 w-full bg-brand py-1.5 px-4 z-[60] flex justify-center items-center">
         <Link
-          href="tel:+15073387200"
+          href="tel:+17632453755"
           className="flex items-center justify-center gap-2 text-white text-sm font-medium"
         >
           <Phone size={14} />
@@ -105,9 +114,13 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex space-x-6 text-[#050B20] w-[90%] justify-end items-center h-full">
             <ul className="flex space-x-6">
               {menuData.map((item) => (
-                <li key={item.name} className="relative group flex items-center">
+                <li key={item.name} className="relative flex items-center">
                   {item.type === 'dropdown' && item.children ? (
-                    <div className="group inline-block relative">
+                    <div 
+                      className="inline-block relative"
+                      onMouseEnter={() => setHoveredMenu(item.name)}
+                      onMouseLeave={() => setHoveredMenu(null)}
+                    >
                       <button
                         className={`${inter.className} flex items-center gap-1 px-3 sm:text-base text-[14px] font-[400] transition-colors duration-200 text-[#050B20] hover:text-brand`}
                         type="button"
@@ -119,7 +132,9 @@ const Navbar: React.FC = () => {
                           viewBox="0 0 16 16"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="transition-transform duration-200 ml-1 group-hover:rotate-180 text-[#050B20] group-hover:text-brand"
+                          className={`transition-transform duration-200 ml-1 text-[#050B20] hover:text-brand ${
+                            hoveredMenu === item.name ? 'rotate-180 text-brand' : ''
+                          }`}
                         >
                           <path
                             d="M4 6L8 10L12 6"
@@ -130,12 +145,18 @@ const Navbar: React.FC = () => {
                           />
                         </svg>
                       </button>
-                      <div className="absolute top-full left-0 w-52 mt-2 bg-white shadow-lg rounded-md z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-brand/10">
+                      <div className={`absolute top-full left-0 w-52 mt-2 bg-white shadow-lg rounded-md z-50 transition-all duration-200 border border-brand/10 ${
+                        hoveredMenu === item.name ? 'opacity-100 visible' : 'opacity-0 invisible'
+                      }`}>
                         <ul className="py-2">
                           {item.children.map((child) => (
-                            <li key={child.name} className="relative group">
+                            <li key={child.name} className="relative">
                               {child.type === 'dropdown' && child.children ? (
-                                <div className="group inline-block relative w-full">
+                                <div 
+                                  className="inline-block relative w-full"
+                                  onMouseEnter={() => setHoveredSubMenu(child.name)}
+                                  onMouseLeave={() => setHoveredSubMenu(null)}
+                                >
                                   <button
                                     className="w-full text-left flex items-center justify-between px-4 py-2 text-sm text-[#050B20] hover:text-brand hover:bg-brand/5"
                                     type="button"
@@ -147,7 +168,9 @@ const Navbar: React.FC = () => {
                                       viewBox="0 0 12 12"
                                       fill="none"
                                       xmlns="http://www.w3.org/2000/svg"
-                                      className="transition-transform duration-200 group-hover:rotate-90"
+                                      className={`transition-transform duration-200 ${
+                                        hoveredSubMenu === child.name ? 'rotate-90' : ''
+                                      }`}
                                     >
                                       <path
                                         d="M4.5 3L7.5 6L4.5 9"
@@ -158,7 +181,9 @@ const Navbar: React.FC = () => {
                                       />
                                     </svg>
                                   </button>
-                                  <div className="absolute top-0 left-full w-52 mt-0 bg-white shadow-lg rounded-md z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 border border-brand/10">
+                                  <div className={`absolute top-0 left-full w-52 mt-0 bg-white shadow-lg rounded-md z-50 transition-all duration-200 border border-brand/10 ${
+                                    hoveredSubMenu === child.name ? 'opacity-100 visible' : 'opacity-0 invisible'
+                                  }`}>
                                     <ul className="py-2">
                                       {child.children.map((subChild) => (
                                         <li key={subChild.name}>
@@ -175,7 +200,7 @@ const Navbar: React.FC = () => {
                                 </div>
                               ) : (
                                 <Link
-                                  href={child.link}
+                                  href={child.link || '#'}
                                   className="block px-4 py-2 text-sm text-[#050B20] hover:text-brand hover:bg-brand/5"
                                 >
                                   {child.name}
@@ -201,7 +226,7 @@ const Navbar: React.FC = () => {
             {/* Call Button */}
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="tel:+15073387200"
+                href="tel:+17632453755"
                 className="flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-full transition-colors duration-200 font-medium ml-4"
               >
                 <Phone size={16} />
@@ -237,7 +262,10 @@ const Navbar: React.FC = () => {
               return (
                 <li key={item.name} className="w-full text-center">
                   <button
-                    onClick={() => setOpenDropdown(isOpen ? null : item.name)}
+                    onClick={() => {
+                      setOpenDropdown(isOpen ? null : item.name);
+                      setOpenSubDropdown(null); // Reset sub-dropdown when main dropdown changes
+                    }}
                     className={`${inter.className} w-full flex items-center justify-center gap-2 px-4 py-2 text-xl font-[400] text-[#050B20]`}
                   >
                     {item.name}
@@ -262,11 +290,11 @@ const Navbar: React.FC = () => {
                   {isOpen &&
                     item.children.map((child) => {
                       if (child.type === 'dropdown' && child.children) {
-                        const isChildOpen = openDropdown === `${item.name}-${child.name}`;
+                        const isChildOpen = openSubDropdown === child.name;
                         return (
                           <li key={child.name} className="w-full text-center">
                             <button
-                              onClick={() => setOpenDropdown(isChildOpen ? null : `${item.name}-${child.name}`)}
+                              onClick={() => setOpenSubDropdown(isChildOpen ? null : child.name)}
                               className={`${inter.className} w-full flex items-center justify-center gap-2 px-4 py-2 text-lg font-[400] text-[#050B20]`}
                             >
                               {child.name}
@@ -288,30 +316,34 @@ const Navbar: React.FC = () => {
                               </svg>
                             </button>
 
-                            {isChildOpen &&
-                              child.children.map((subChild) => (
-                                <li key={subChild.name} className="w-full text-center">
-                                  <Link
-                                    href={subChild.link}
-                                    className={`${inter.className} block text-[#050B20] px-4 py-2 text-base font-[400] ${
-                                      isActive(subChild.link) ? 'text-[#EC0100] font-semibold' : ''
-                                    }`}
-                                    onClick={() => {
-                                      setIsMobileMenuOpen(false);
-                                      setOpenDropdown(null);
-                                    }}
-                                  >
-                                    {subChild.name}
-                                  </Link>
-                                </li>
-                              ))}
+                            {isChildOpen && (
+                              <ul className="w-full">
+                                {child.children.map((subChild) => (
+                                  <li key={subChild.name} className="w-full text-center">
+                                    <Link
+                                      href={subChild.link}
+                                      className={`${inter.className} block text-[#050B20] px-8 py-2 text-base font-[400] hover:bg-brand/10 ${
+                                        isActive(subChild.link) ? 'text-[#EC0100] font-semibold' : ''
+                                      }`}
+                                      onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        setOpenDropdown(null);
+                                        setOpenSubDropdown(null);
+                                      }}
+                                    >
+                                      {subChild.name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </li>
                         );
                       }
                       return child.link ? (
                         <li key={child.name} className="w-full text-center">
                           <Link
-                            href={child.link}
+                            href={child.link || '#'}
                                     className={`${inter.className} block text-[#050B20] px-4 py-2 text-lg font-[400] ${
                                       isActive(child.link) ? 'text-brand font-semibold' : ''
                                     }`}
@@ -349,7 +381,7 @@ const Navbar: React.FC = () => {
           <li className="w-full px-8 mt-8">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="tel:+15073387200"
+                href="tel:+17632453755"
                 className="flex items-center justify-center gap-2 bg-brand hover:bg-brand-hover text-white px-6 py-3 rounded-full transition-colors duration-200 font-medium text-lg w-full"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

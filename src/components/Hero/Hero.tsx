@@ -22,7 +22,7 @@ export default function Hero() {
         <div className="absolute inset-0 backdrop-blur-[2px]" />
       </div>
 
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 lg:py-20 relative flex items-center min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-80px)]">
+      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20 md:pt-0 md:py-16 lg:py-20 relative flex items-center min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-80px)]">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 w-full">
           {/* Left Column - Content */}
           <motion.div
@@ -104,8 +104,13 @@ export default function Hero() {
                   </span>
                 </motion.div>
               </Link>
-              <Link
-                href="/services"
+              <motion.button
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="group relative w-full sm:w-auto"
               >
                 <motion.div
@@ -115,9 +120,10 @@ export default function Hero() {
                 >
                   <span className="relative flex items-center gap-2">
                     Our Services
+                    <ArrowRight className="w-4 h-4" />
                   </span>
                 </motion.div>
-              </Link>
+              </motion.button>
             </motion.div>
           </motion.div>
 

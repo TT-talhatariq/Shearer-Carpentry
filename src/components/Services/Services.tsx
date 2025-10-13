@@ -33,6 +33,7 @@ export default function Services() {
       ],
       image: '/images/basement.webp',
       color: 'from-blue-500 to-blue-600',
+      link: '/services/home-remodeling/basement-remodeling',
     },
     {
       icon: Bath,
@@ -47,6 +48,7 @@ export default function Services() {
       ],
       image: '/images/bathroom.webp',
       color: 'from-green-500 to-green-600',
+      link: '/services/home-remodeling/bathroom-remodeling',
     },
     {
       icon: ChefHat,
@@ -60,6 +62,7 @@ export default function Services() {
       ],
       image: '/images/kitchen.webp',
       color: 'from-purple-500 to-purple-600',
+      link: '/services/home-remodeling/kitchen-remodeling',
     },
     {
       icon: Home,
@@ -74,6 +77,7 @@ export default function Services() {
       ],
       image: '/images/custom-home.webp',
       color: 'from-orange-500 to-orange-600',
+      link: '/services/home-construction',
     },
   ];
 
@@ -93,14 +97,14 @@ export default function Services() {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 100,
       },
     },
   };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-white">
+    <section id="services" className="relative md:py-20 py-0 overflow-hidden bg-gradient-to-br from-primary-50 via-secondary-50 to-white">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-primary-100/40 to-secondary-100/30" />
@@ -185,7 +189,7 @@ export default function Services() {
                     Book Now
                   </Link>
                   <Link
-                    href="/services"
+                    href={service.link}
                     className="flex-1 inline-flex items-center justify-center px-4 py-2 border-2 border-brand text-brand font-semibold rounded-full hover:bg-brand/10 transition-all duration-300 text-sm"
                   >
                     View Detail
@@ -209,12 +213,7 @@ export default function Services() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <Link
-            href="/services"
-            className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-brand border-2 border-brand rounded-full hover:bg-brand/10 transition-all duration-300"
-          >
-            View All Services
-          </Link>
+      
         </motion.div>
       </div>
     </section>

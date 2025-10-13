@@ -1,0 +1,16 @@
+export const images = [
+  "/drawer.jpeg",
+  "/cabinet.jpeg",
+  "/room.jpeg",
+  "/washroom.jpeg",
+  "/hall.jpeg",
+  "/daraz.jpeg",
+  "/man.webp",
+  "/stairs.jpeg",
+  "/kitchen.jpeg",
+  "/kitchen-gray.jpeg",
+  "/renovation.jpeg",
+  "/out-door.jpeg",
+  "/renovations.jpeg",
+  "/drawing-room.jpeg",
+];
