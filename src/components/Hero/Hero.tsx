@@ -136,7 +136,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-brand/20 via-brand/10 to-brand/5 rounded-[2rem] sm:rounded-[2.5rem]" />
               <div className="relative h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl">
                 <Image
-                  src="/image/hero-bg.jpg"
+                  src="/images/hero-bg.jpg"
                   alt="Professional Carpentry Services - Shearer Carpentry"
                   className="object-cover object-center transform hover:scale-105 transition-transform duration-700"
                   fill

@@ -13,8 +13,18 @@
         "type": "dropdown",
         "children": [
           {
-            "name": "Sub Categories",
-            "link": "/services/home-remodeling/sub-categories",
+            "name": "Basement Remodeling",
+            "link": "/services/home-remodeling/basement-remodeling",
+            "type": "link"
+          },
+          {
+            "name": "Bathroom Remodeling",
+            "link": "/services/home-remodeling/bathroom-remodeling",
+            "type": "link"
+          },
+          {
+            "name": "Kitchen Remodeling",
+            "link": "/services/home-remodeling/kitchen-remodeling",
             "type": "link"
           }
         ]

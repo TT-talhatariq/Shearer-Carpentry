@@ -68,15 +68,15 @@ const Navbar: React.FC = () => {
       <TopInfoHeader />
 
       <nav
-        className={`fixed z-50 w-full h-[100px] py-7 px-4 sm:px-6 lg:px-16 transition-all duration-300 ${
+        className={`fixed z-50 w-full h-[100px] py-7 transition-all duration-300 ${
           isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
         } ${!isScrolled && !isCarDetailPage ? 'md:top-6 top-[28px]' : 'md:top-6 top-[16px]'}`}
       >
-        <div className="max-w-[1440px] mx-auto flex justify-between items-center h-[50px]">
+        <div className="max-w-[1440px] mx-auto flex justify-between items-center h-[50px] px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/">
             <Image
-              src="/image/shearer-carpentry-logo.png"
+              src="/images/shearer-carpentry-logo.png"
               alt="Shearer Carpentry Logo"
               width={200}
               height={50}
