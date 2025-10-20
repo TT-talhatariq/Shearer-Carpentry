@@ -120,7 +120,7 @@ export default function About() {
             <div className="relative">
               <div className="aspect-[4/3] lg:aspect-[5/3] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl lg:shadow-2xl">
                 <Image
-                  src="/images/hero-bg.jpg"
+                  src="/man.webp"
                   alt="Shearer Carpentry professional construction services"
                   fill
                   className="object-cover rounded-2xl lg:rounded-3xl"
