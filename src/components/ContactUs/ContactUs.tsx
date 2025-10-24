@@ -194,7 +194,7 @@ export default function ContactUs() {
       const html = EmailTemplate(formData);
 
       const response = await fetch(
-        'https://api.carzoomo.com/socially/send-email',
+        'https://api.carbacked.com/socially',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
