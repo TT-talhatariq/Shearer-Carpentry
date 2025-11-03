@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
           className="flex items-center justify-center gap-2 text-white text-sm font-medium"
         >
           <Phone size={14} />
-          Call us now
+          Call Us: (763) 245-3755
         </Link>
       </div>
 
