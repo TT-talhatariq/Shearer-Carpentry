@@ -163,6 +163,19 @@ export default function Footer() {
               reserved.
             </p>
           </div>
+          <div className="w-full text-center mt-4">
+            <p className="text-gray-400 text-sm">
+              Developed by{" "}
+              <Link
+                href="https://websocially.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-400 transition-colors duration-200"
+              >
+                websocially.io
+              </Link>
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>
