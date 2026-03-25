@@ -1,53 +1,53 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { 
-  MapPin, 
-  Building, 
-  Home, 
-  Wrench, 
-  Hammer, 
-  Construction 
-} from 'lucide-react';
+import { motion } from "framer-motion";
+import Link from "next/link";
+import {
+  MapPin,
+  Building,
+  Home,
+  Wrench,
+  Hammer,
+  Construction,
+} from "lucide-react";
 
 export default function Areas() {
   const areas = [
     {
-      name: 'Plymouth',
-      description: 'Main Service Area',
+      name: "Plymouth",
+      description: "Main Service Area",
       icon: Building,
-      color: 'from-blue-500 to-blue-600',
+      color: "from-blue-500 to-blue-600",
     },
     {
-      name: 'Minneapolis',
-      description: 'Service Area',
+      name: "Minneapolis",
+      description: "Service Area",
       icon: Home,
-      color: 'from-green-500 to-green-600',
+      color: "from-green-500 to-green-600",
     },
     {
-      name: 'Saint Paul',
-      description: 'Service Area',
+      name: "Medina",
+      description: "Service Area",
       icon: Wrench,
-      color: 'from-purple-500 to-purple-600',
+      color: "from-purple-500 to-purple-600",
     },
     {
-      name: 'Eden Prairie',
-      description: 'Service Area',
+      name: "Eden Prairie",
+      description: "Service Area",
       icon: Hammer,
-      color: 'from-orange-500 to-orange-600',
+      color: "from-orange-500 to-orange-600",
     },
     {
-      name: 'Bloomington',
-      description: 'Service Area',
+      name: "Bloomington",
+      description: "Service Area",
       icon: Construction,
-      color: 'from-red-500 to-red-600',
+      color: "from-red-500 to-red-600",
     },
     {
-      name: 'Maple Grove',
-      description: 'Service Area',
+      name: "Maple Grove",
+      description: "Service Area",
       icon: MapPin,
-      color: 'from-teal-500 to-teal-600',
+      color: "from-teal-500 to-teal-600",
     },
   ];
 
@@ -67,7 +67,7 @@ export default function Areas() {
       opacity: 1,
       y: 0,
       transition: {
-        type: 'spring' as const,
+        type: "spring" as const,
         stiffness: 100,
       },
     },
@@ -99,14 +99,15 @@ export default function Areas() {
             </span>
             Service Coverage
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Areas We Serve
           </h2>
           <div className="h-1 w-32 mx-auto bg-gradient-to-r from-brand to-brand-hover rounded-full mb-6" />
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Proudly serving the Metro Area and surrounding communities with professional 
-            construction and remodeling services. We bring quality craftsmanship to your doorstep.
+            Proudly serving the Metro Area and surrounding communities with
+            professional construction and remodeling services. We bring quality
+            craftsmanship to your doorstep.
           </p>
         </motion.div>
 
@@ -126,7 +127,9 @@ export default function Areas() {
             >
               {/* Icon */}
               <div className="flex items-center mb-4">
-                <div className={`w-12 h-12 bg-gradient-to-br ${area.color} rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-12 h-12 bg-gradient-to-br ${area.color} rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}
+                >
                   <area.icon className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1">

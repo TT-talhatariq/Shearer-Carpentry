@@ -1,14 +1,14 @@
 interface ContactFormData {
-    name: string;
-    email: string;
-    phone: string;
-    message: string;
-  }
-  
-  export function EmailTemplate(values: any): string {
-    const { name, email, phone, message } = values;
-  
-    return `
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+export function EmailTemplate(values: any): string {
+  const { name, email, phone, message } = values;
+
+  return `
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -124,12 +124,11 @@ interface ContactFormData {
               <div class="email-footer">
                 © Mira Exteriors. All rights reserved.<br/>
                 Professional Roofing & Exterior Services<br/>
-                Saint Paul, MN | +1 612-756-8585 | miraexteriorsmn@gmail.com
+                Medina, MN | +1 612-756-8585 | miraexteriorsmn@gmail.com
               </div>
             </div>
           </div>
         </body>
       </html>
     `;
-  }
-  
+}
